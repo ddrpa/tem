@@ -1,0 +1,11 @@
+# Ignore artifacts:
+.prettierrc
+.tmp
+.gitignore
+out/
+build/
+dist/
+.vscode/
+.idea/
+vendors/
+coverage/

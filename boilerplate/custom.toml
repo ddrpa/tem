@@ -1,0 +1,15 @@
+#[[template]]
+#key = "maven-wrapper"
+#assets = [
+#    ["custom/maven/mvnw", "mvnw"],
+#    ["custom/maven/mvnw.cmd", "mvnw.cmd"],
+#    ["custom/maven/maven-wrapper.jar", ".mvn/wrapper/maven-wrapper.jar"],
+#    ["custom/maven/maven-wrapper.properties", ".mvn/wrapper/maven-wrapper.properties"]
+#]
+#
+#[[template]]
+#key = "golang"
+#alias = ["golang-ignore"]
+#assets = [
+#    ["https://www.toptal.com/developers/gitignore/api/goland+all,macos,linux,windows,visualstudiocode", ".gitignore"]
+#]

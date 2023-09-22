@@ -1,0 +1,44 @@
+configVersion = 1.0
+
+[[template]]
+key = "gitignore-java"
+assets = [
+    ["default/git/java.gitignore", ".gitignore"]
+]
+
+[[template]]
+key = "gitignore-python"
+assets = [
+    ["default/git/python.gitignore", ".gitignore"]
+]
+
+[[template]]
+key = "gitignore-javascript"
+assets = [
+    ["default/git/javascript.gitignore", ".gitignore"]
+]
+
+[[template]]
+key = "gitignore-golang"
+assets = [
+    ["default/git/golang.gitignore", ".gitignore"]
+]
+
+[[template]]
+key = "uml-class"
+assets = [
+    ["default/plantuml/class.puml", "class.puml"]
+]
+
+[[template]]
+key = "uml-mindmap"
+assets = [
+    ["default/plantuml/mindmap.puml", "mindmap.puml"]
+]
+
+[[template]]
+key = "prettier"
+assets = [
+    ["default/prettier/prettierignore.ignore", ".prettierignore"],
+    ["default/prettier/prettierrc.json", ".prettierrc"]
+]

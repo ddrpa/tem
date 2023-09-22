@@ -1,0 +1,261 @@
+
+========= starting completion logic ==========
+CURRENT: 3, words[*]: tem add 
+Truncated words[*]: tem add ,
+lastParam: , lastChar: 
+Adding extra empty parameter
+About to call: eval tem __complete add  ""
+completion output: gitignore-javascript
+uml-class
+uml-mindmap
+prettier
+maven-setting
+go-release
+gitignore-java
+maven-wrapper
+gitignore-python
+:4
+last line: :4
+directive: 4
+completions: gitignore-javascript
+uml-class
+uml-mindmap
+prettier
+maven-setting
+go-release
+gitignore-java
+maven-wrapper
+gitignore-python
+flagPrefix: 
+Adding completion: gitignore-javascript
+Adding completion: uml-class
+Adding completion: uml-mindmap
+Adding completion: prettier
+Adding completion: maven-setting
+Adding completion: go-release
+Adding completion: gitignore-java
+Adding completion: maven-wrapper
+Adding completion: gitignore-python
+Calling _describe
+_describe found some completions
+
+========= starting completion logic ==========
+CURRENT: 3, words[*]: tem add 
+Truncated words[*]: tem add ,
+lastParam: , lastChar: 
+Adding extra empty parameter
+About to call: eval tem __complete add  ""
+completion output: gitignore-javascript
+uml-class
+uml-mindmap
+prettier
+maven-wrapper
+maven-setting
+gitignore-java
+go-release
+gitignore-python
+:4
+last line: :4
+directive: 4
+completions: gitignore-javascript
+uml-class
+uml-mindmap
+prettier
+maven-wrapper
+maven-setting
+gitignore-java
+go-release
+gitignore-python
+flagPrefix: 
+Adding completion: gitignore-javascript
+Adding completion: uml-class
+Adding completion: uml-mindmap
+Adding completion: prettier
+Adding completion: maven-wrapper
+Adding completion: maven-setting
+Adding completion: gitignore-java
+Adding completion: go-release
+Adding completion: gitignore-python
+Calling _describe
+_describe found some completions
+
+========= starting completion logic ==========
+CURRENT: 2, words[*]: tem add
+Truncated words[*]: tem add,
+lastParam: add, lastChar: d
+About to call: eval tem __complete add
+completion output: add	Copy files into current directory
+:4
+last line: :4
+directive: 4
+completions: add	Copy files into current directory
+flagPrefix: 
+Adding completion: add:Copy files into current directory
+Calling _describe
+_describe found some completions
+
+========= starting completion logic ==========
+CURRENT: 3, words[*]: tem add 
+Truncated words[*]: tem add ,
+lastParam: , lastChar: 
+Adding extra empty parameter
+About to call: eval tem __complete add  ""
+completion output: maven-wrapper
+gitignore-python
+gitignore-javascript
+uml-class
+uml-mindmap
+prettier
+maven-setting
+go-release
+gitignore-java
+:4
+last line: :4
+directive: 4
+completions: maven-wrapper
+gitignore-python
+gitignore-javascript
+uml-class
+uml-mindmap
+prettier
+maven-setting
+go-release
+gitignore-java
+flagPrefix: 
+Adding completion: maven-wrapper
+Adding completion: gitignore-python
+Adding completion: gitignore-javascript
+Adding completion: uml-class
+Adding completion: uml-mindmap
+Adding completion: prettier
+Adding completion: maven-setting
+Adding completion: go-release
+Adding completion: gitignore-java
+Calling _describe
+_describe found some completions
+
+========= starting completion logic ==========
+CURRENT: 3, words[*]: tem add 
+Truncated words[*]: tem add ,
+lastParam: , lastChar: 
+Adding extra empty parameter
+About to call: eval tem __complete add  ""
+completion output: gitignore-python
+uml-class
+prettier
+go-release
+gitignore-java
+gitignore-javascript
+uml-mindmap
+maven-wrapper
+maven-setting
+:4
+last line: :4
+directive: 4
+completions: gitignore-python
+uml-class
+prettier
+go-release
+gitignore-java
+gitignore-javascript
+uml-mindmap
+maven-wrapper
+maven-setting
+flagPrefix: 
+Adding completion: gitignore-python
+Adding completion: uml-class
+Adding completion: prettier
+Adding completion: go-release
+Adding completion: gitignore-java
+Adding completion: gitignore-javascript
+Adding completion: uml-mindmap
+Adding completion: maven-wrapper
+Adding completion: maven-setting
+Calling _describe
+_describe found some completions
+
+========= starting completion logic ==========
+CURRENT: 3, words[*]: tem add 
+Truncated words[*]: tem add ,
+lastParam: , lastChar: 
+Adding extra empty parameter
+About to call: eval tem __complete add  ""
+completion output: uml-class
+prettier
+maven-wrapper
+maven-setting
+go-release
+gitignore-java
+gitignore-python
+gitignore-javascript
+gitignore-golang
+uml-mindmap
+:4
+last line: :4
+directive: 4
+completions: uml-class
+prettier
+maven-wrapper
+maven-setting
+go-release
+gitignore-java
+gitignore-python
+gitignore-javascript
+gitignore-golang
+uml-mindmap
+flagPrefix: 
+Adding completion: uml-class
+Adding completion: prettier
+Adding completion: maven-wrapper
+Adding completion: maven-setting
+Adding completion: go-release
+Adding completion: gitignore-java
+Adding completion: gitignore-python
+Adding completion: gitignore-javascript
+Adding completion: gitignore-golang
+Adding completion: uml-mindmap
+Calling _describe
+_describe found some completions
+
+========= starting completion logic ==========
+CURRENT: 3, words[*]: tem add 
+Truncated words[*]: tem add ,
+lastParam: , lastChar: 
+Adding extra empty parameter
+About to call: eval tem __complete add  ""
+completion output: gitignore-java
+gitignore-golang
+go-release
+gitignore-python
+gitignore-javascript
+uml-class
+uml-mindmap
+prettier
+maven-wrapper
+maven-setting
+:4
+last line: :4
+directive: 4
+completions: gitignore-java
+gitignore-golang
+go-release
+gitignore-python
+gitignore-javascript
+uml-class
+uml-mindmap
+prettier
+maven-wrapper
+maven-setting
+flagPrefix: 
+Adding completion: gitignore-java
+Adding completion: gitignore-golang
+Adding completion: go-release
+Adding completion: gitignore-python
+Adding completion: gitignore-javascript
+Adding completion: uml-class
+Adding completion: uml-mindmap
+Adding completion: prettier
+Adding completion: maven-wrapper
+Adding completion: maven-setting
+Calling _describe
+_describe found some completions
