@@ -1,4 +1,5 @@
 target/
+debug
 tem
 
 # Created by https://www.toptal.com/developers/gitignore/api/goland+all,macos,linux,windows,visualstudiocode
