@@ -7,6 +7,9 @@ import (
 // DefaultBoilerplateFs 新的默认模版需要在这里添加
 //
 //go:embed default.toml
+//go:embed ci/jenkinsfile
+//go:embed container/dockerfile
+//go:embed container/dockerfile-rootless
 //go:embed git/java.gitignore
 //go:embed git/javascript.gitignore
 //go:embed git/python.gitignore

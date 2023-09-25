@@ -1,0 +1,83 @@
+pipeline {
+    agent any
+    environment {
+        GIT_REPOSITORY = '<foo>'
+        PROJECT_NAME = '<foo>'
+        MAVEN_ARTIFACT = '<foo>-0.0.1-SNAPSHOT.jar'
+
+        DOCKERFILE_PATH = 'Dockerfile'
+        DOCKER_BUILD_CONTEXT = '.'
+        DOCKER_REGISTRY_HOST = 'registry.<foo>.com'
+
+        IMAGE_NAME = "${PROJECT_NAME.toLowerCase()}"
+        // push tag 触发构建时 REF 为 refs/tags/[tag-name]
+        // 设置镜像版本号为 tag-name
+        // 手动触发构建则使用 master 分支
+        // 设置镜像版本号为 latest
+        // 只有 latest tag 允许覆写
+        IMAGE_VERSION = "${REF?:'latest'}"
+        GIT_CHECKOUT_BRANCH = "${REF?'refs/tags/'+REF:'*/master'}"
+    }
+    stages {
+        stage("Check vars and env") {
+            steps {
+                echo "image version should be: ${IMAGE_VERSION}"
+                echo "checkout code form: ${GIT_CHECKOUT_BRANCH}"
+            }
+        }
+
+        stage("Checkout") {
+            steps {
+                // 检出路径为 /root/.jenkins/workspace/<project-name>
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: "${GIT_CHECKOUT_BRANCH}"]],
+                    extensions: [],
+                    userRemoteConfigs: [[url: "${GIT_REPOSITORY}"]]])
+            }
+        }
+
+//        stage("Vulnerability scan") {
+//            steps {
+//                sh '/usr/bin/osv-scanner --experimental-call-analysis --config=osv-scanner.toml --recursive .'
+//            }
+//        }
+
+        stage("Build jar file") {
+            agent {
+                docker {
+                    image 'docker.io/library/maven:3-eclipse-temurin-17'
+                    // Run the container on the node specified at the
+                    // top-level of the Pipeline, in the same workspace,
+                    // rather than on a new node entirely:
+                    reuseNode true
+                    args '-v $HOME/.m2:/root/.m2'
+                }
+            }
+            steps {
+                // 由于容器已经固化了环境，不需要使用 maven-wrapper
+                // 使用项目中的 settings.xml 覆写仓库和镜像配置（以及用户凭证）
+                sh 'mvn --settings ./settings.xml -Dmaven.test.skip=true -Ddockerfile.skip=true clean package'
+            }
+        }
+
+        stage("Build container image") {
+            steps {
+                sh "docker build --build-arg JAR_FILE=target/${MAVEN_ARTIFACT} --tag ${IMAGE_NAME}:${IMAGE_VERSION} --file ${DOCKERFILE_PATH} ${DOCKER_BUILD_CONTEXT}"
+            }
+        }
+
+        stage("Upload to registry") {
+            environment {
+                REGISTRY_CREDS = credentials('<foo>-docker-registry-credentials')
+            }
+            steps {
+                // https://www.jenkins.io/doc/book/pipeline/jenkinsfile/#string-interpolation
+                // 通过直接把环境变量传递给 Groovy 函数的方式避免在 shell 环境中暴露密码
+                sh('docker login $DOCKER_REGISTRY_HOST -u $REGISTRY_CREDS_USR -p $REGISTRY_CREDS_PSW')
+                sh "docker tag ${IMAGE_NAME}:${IMAGE_VERSION} ${DOCKER_REGISTRY_HOST}/${IMAGE_NAME}:${IMAGE_VERSION}"
+                sh "docker push ${DOCKER_REGISTRY_HOST}/${IMAGE_NAME}:${IMAGE_VERSION}"
+            }
+        }
+    }
+}

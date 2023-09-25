@@ -1,0 +1,27 @@
+# 如果你用的不是 JDK 17，去 https://hub.docker.com/_/eclipse-temurin/tags 找
+# 这里的镜像 tag 也许会更新，你可以用 custom 配置覆盖（固化）
+FROM eclipse-temurin:17.0.8.1_1-jre-alpine
+LABEL org.opencontainers.image.authors="foo@bar.com"
+
+# 根据使用的镜像基底，添加 group:user 的命令可能有所不同
+RUN addgroup -S app && adduser -S app -G app
+# 替换为 Aliyun 镜像源
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
+# 时区设置
+RUN apk add -U tzdata
+ENV TZ=Asia/Shanghai
+RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
+# 可选：支持 CJK 字符的字体，如果有生成包含中文字符的文件推荐加上
+# 没有就移除，这个包蛮大的
+#RUN apk add font-noto font-noto-cjk
+
+USER app:app
+WORKDIR /app
+RUN mkdir -p /app/logs/
+VOLUME /app/logs/
+ARG JAR_FILE
+ADD ${JAR_FILE} /app/app.jar
+
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=prod", "/app/app.jar"]

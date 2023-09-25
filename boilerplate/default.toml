@@ -1,6 +1,18 @@
 configVersion = 1.0
 
 [[template]]
+key = "dockerfile"
+assets = [
+    ["default/container/dockerfile", "Dockerfile"]
+]
+
+[[template]]
+key = "dockerfile-rootless"
+assets = [
+    ["default/container/dockerfile-rootless", "Dockerfile"]
+]
+
+[[template]]
 key = "gitignore-java"
 assets = [
     ["default/git/java.gitignore", ".gitignore"]
@@ -22,6 +34,12 @@ assets = [
 key = "gitignore-golang"
 assets = [
     ["default/git/golang.gitignore", ".gitignore"]
+]
+
+[[template]]
+key = "jenkins"
+assets = [
+    ["default/ci/jenkinsfile", "Jenkinsfile"]
 ]
 
 [[template]]
