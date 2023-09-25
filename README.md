@@ -1,5 +1,17 @@
 # tem: 样板文件注入器
 
+# 支持列表
+
+- `Dockerfile` 模版，有 rootless 和 rootful 版本
+- `Jenkinsfile`
+- `.gitignore` 文件（Go / Java / JavaScript / Python）
+- PlantUML Class 模版和 MindMap 模版
+- Prettier 配置和 ignore 文件
+
+输入小写字母的名称，自动补全将会列出可选项。
+
+# 简介
+
 很多时候我们需要快速创建一些固定的样板文件：
 
 - 补充特定语言的 gitignore 文件
@@ -9,11 +21,11 @@
 
 大部分情况下我们只是需要把项目中的某个默认文件替换为自己的版本，或者添加一两个文件。
 使用 yeoman 这样的工具创建工程模版似乎有点小题大做。
-2020 年之前我会选择找一个以前的项目拷贝文件。
-后来换成了一个 Zsh 脚本，从 `$HOME/public/` 下拷贝样板文件到当前目录，
-并且通过 Zsh 机制实现自动补全，不过每次新增文件就要修改脚本，并不是特别方便。
+2020 年我从找一个以前的项目拷贝文件进化到使用一个 Zsh 脚本从 `$HOME/public/`
+下拷贝样板文件到当前目录。这个脚本还支持了自动补全，不过每次新增文件就要修改，并不是特别方便。
 
 ```shell
+# 其中一段截取出来长这样
 ...
 UML_MINDMAP="$CT_TEMPLATES_PATH/plantuml/mindmap"
 PRETTIER_IGNORE="$CT_TEMPLATES_PATH/prettier/prettierignore"
@@ -30,8 +42,8 @@ case $1 {
 ...
 ```
 
-现在 `tem add gitignore-java -y` 这样的命令将在当前目录下创建一个 `.gitignore` 文件，
-相较 Spring Initializr 提供的默认 `.gitignore` 文件添加了不少符合我本人以及团队实践习惯的排除项。
+Tem 是我的最新方案，`tem add gitignore-java -y` 这样的命令将在当前目录下创建一个 `.gitignore` 文件，
+相较 Spring Initializr 提供的 `.gitignore` 添加了不少符合我本人以及团队实践习惯的排除项。
 
 ## 首次使用与升级
 
