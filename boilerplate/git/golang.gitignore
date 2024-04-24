@@ -185,4 +185,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# Microsoft Office Temp Files
+~$*
+
 # End of https://www.toptal.com/developers/gitignore/api/goland+all,macos,linux,windows,visualstudiocode

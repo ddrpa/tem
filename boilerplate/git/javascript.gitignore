@@ -153,3 +153,6 @@ sftp-config.json
 /src/.umi-production
 /src/.umi-test
 /.env.local
+
+# Microsoft Office Temp Files
+~$*
