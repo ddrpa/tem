@@ -45,7 +45,9 @@ case $1 {
 Tem 是我的最新方案，`tem add gitignore-java -y` 这样的命令将在当前目录下创建一个 `.gitignore` 文件，
 相较 Spring Initializr 提供的 `.gitignore` 添加了不少符合我本人以及团队实践习惯的排除项。
 
-## 首次使用与升级
+## 安装后的首次使用与升级
+
+从 release 页面下载二进制文件，解压后放到 `$PATH` 下即可使用。
 
 首次安装或升级后需要执行 `tem init`。
 tem 会检查 `$HOME/.tem/` 目录，并替换该目录下 `default/` 的内容：
@@ -76,6 +78,12 @@ tem 通过 `github.com/spf13/cobra` 实现了强大的自动补全功能，支�
 $ tem completion zsh > "$ZSH_CACHE_DIR/completions/_tem"
 ```
 
+### 使用方法
+
+`add` 命令用于将模板文件写入以当前工作目录为起始点的预设相对路径。
+
+在输入 `tem add $key -y` 的 `key` 参数时，可以使用 <kbd>Tab</kbd> 进行自动补全。如果不添加 `-y` 参数，tem 会告诉你将要执行什么操作，但不会把文件写入磁盘。
+
 ## 使用自定义样板
 
 `tem init` 生成的示例 `custom/custom.toml` 文件为例（移除了注释符号）：
@@ -105,4 +113,8 @@ tem 会自动创建目标文件的父目录。
 
 `assets` 中的源文件可以是本地文件，也可以是网络文件，网络文件目前支持 HTTP 和 HTTPS。
 
-如果不使用 `-y` 参数，tem 会告诉你将要执行什么操作，但不会把文件写入磁盘。
+### 添加子配置
+
+tem 现在支持子配置，在读取 `$TEM_HOME/custom/custom.toml` 时，会检查 `[config]` 下的 `imports` 字段，载入其他配置文件。
+
+模版配置的加载使用深度优先的方案，即读取到子配置文件就先加载子配置文件中的内容，因此需要将可能重名且优先度较高的的模版 key 放在加载队列的后方。

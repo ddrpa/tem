@@ -13,3 +13,8 @@
 #assets = [
 #    ["https://www.toptal.com/developers/gitignore/api/goland+all,macos,linux,windows,visualstudiocode", ".gitignore"]
 #]
+#
+#[config]
+#imports = [
+#    "custom/some-config-pull-from-another-repo-like-git/custom.toml"
+#]

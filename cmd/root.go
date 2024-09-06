@@ -15,6 +15,10 @@ type RawTemplate struct {
 	Assets [][]string `mapstructure:"assets"`
 }
 
+type RawCustomConfig struct {
+	Imports []string `mapstructure:"imports"`
+}
+
 type Template struct {
 	Key    string
 	Assets []Asset
@@ -27,7 +31,7 @@ type Asset struct {
 }
 
 const (
-	Version = "0.0.1"
+	Version = "1.0.0"
 )
 
 var temHomeDir string
@@ -60,40 +64,47 @@ func Execute() {
 	}
 }
 
-func init() {
-	home, err := os.UserHomeDir()
-	cobra.CheckErr(err)
-	temHomeDir = path.Join(home, ".tem")
-	cobra.OnInitialize(initConfig)
-}
-
 func initConfig() {
 	// load default config
-	defaultConfigViper := viper.New()
-	defaultConfigViper.AddConfigPath(defaultBoilerplateDir)
-	defaultConfigViper.SetConfigType("toml")
-	defaultConfigViper.SetConfigName("default")
-	if err := defaultConfigViper.ReadInConfig(); err == nil {
-		var rawTemplates []RawTemplate
-		err := defaultConfigViper.UnmarshalKey("template", &rawTemplates)
-		cobra.CheckErr(err)
-		loadTemplate(templateMap, rawTemplates)
-	} else {
+	if err := loadConfig(defaultBoilerplateDir, "default", "toml"); err != nil {
 		fmt.Fprintln(os.Stderr, "Parse default configuration failed, 'tem init' may fix it")
 	}
-
 	// load custom config
+	if err := loadConfig(customBoilerplateDir, "custom", "toml"); err != nil {
+		fmt.Fprintln(os.Stderr, "Parse customized configuration %s failed", path.Join(customBoilerplateDir, "custom.toml"))
+	}
+}
+
+/**
+ * loadConfig load configuration from config file, depth first
+ * @param configPath string
+ */
+func loadConfig(configPath string, configName string, configType string) error {
 	customConfigViper := viper.New()
-	customConfigViper.AddConfigPath(customBoilerplateDir)
-	customConfigViper.SetConfigType("toml")
-	customConfigViper.SetConfigName("custom")
+	customConfigViper.AddConfigPath(configPath)
+	customConfigViper.SetConfigName(configName)
+	customConfigViper.SetConfigType(configType)
 	if err := customConfigViper.ReadInConfig(); err == nil {
+		var rawCustomConfig RawCustomConfig
+		err := customConfigViper.UnmarshalKey("config", &rawCustomConfig)
+		cobra.CheckErr(err)
+		for _, importConfig := range rawCustomConfig.Imports {
+			// split config file path
+			dir, file := path.Split(importConfig)
+			// split file name and extension
+			fileSlice := strings.Split(file, ".")
+			// load custom config
+			if err := loadConfig(path.Join(temHomeDir, dir), fileSlice[0], fileSlice[1]); err != nil {
+				fmt.Fprintf(os.Stderr, "Parse %s configuration failed\n", importConfig)
+			}
+		}
 		var rawTemplates []RawTemplate
-		err := customConfigViper.UnmarshalKey("template", &rawTemplates)
+		err = customConfigViper.UnmarshalKey("template", &rawTemplates)
 		cobra.CheckErr(err)
 		loadTemplate(templateMap, rawTemplates)
+		return nil
 	} else {
-		fmt.Fprintln(os.Stderr, "Parse customized configuration failed")
+		return err
 	}
 }
 
