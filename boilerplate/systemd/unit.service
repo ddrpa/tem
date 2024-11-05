@@ -1,0 +1,20 @@
+# ln -s unit.service $HOME/.config/systemd/user/
+[Unit]
+Description=
+# 等待网络可用后启动
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+# 设置服务执行的工作目录，相当于使用 cd 命令切换到该目录下
+# 注意这不代表单元文件的其他配置使用这个路径作为相对路径的起点
+WorkingDirectory=/home/user/WorkSpace/demo-website
+# 使用绝对路径启动应用
+ExecStart=/usr/bin/java -jar /home/user/WorkSpace/demo-website/demo-website-0.0.1.jar
+# 总是重新启动
+Restart=always
+
+[Install]
+# 应用程序是以非 root 用户运行的
+WantedBy=default.target

@@ -60,3 +60,16 @@ assets = [
     ["default/prettier/prettierignore.ignore", ".prettierignore"],
     ["default/prettier/prettierrc.json", ".prettierrc"]
 ]
+
+[[template]]
+key = "systemd-service"
+assets = [
+    ["default/systemd/unit.service", "unit.service"]
+]
+
+[[template]]
+key = "systemd-timer"
+assets = [
+    ["default/systemd/timer.timer", "timer.timer"]
+]
+

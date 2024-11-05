@@ -18,6 +18,8 @@ import (
 //go:embed plantuml/mindmap.puml
 //go:embed prettier/prettierignore.ignore
 //go:embed prettier/prettierrc.json
+//go:embed systemd/unit.service
+//go:embed systemd/unit.timer
 var DefaultBoilerplateFs embed.FS
 
 //go:embed custom.toml

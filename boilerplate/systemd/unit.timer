@@ -1,0 +1,18 @@
+# ln -s unit.timer $HOME/.config/systemd/user/
+[Unit]
+Description=
+
+[Timer]
+# 挂钟定时器通过表达式定义任务的激活规律
+# 可以使用 systemd-analyze calendar Mon *-*-* 15:00:00 命令验证这个表达式
+# OnCalendar=Mon *-*-* 15:00:00
+# OnCalendar=weekly
+# 单调定时器在某个时间点的一段时间后激活定时任务
+# OnBootSec=5min
+# OnActiveSec=5
+# OnUnitActiveSec=5
+# 如果上次未执行（比如说系统当时没有开机）就立即执行服务
+Persistent=true
+
+[Install]
+WantedBy=timers.target
